@@ -1,5 +1,4 @@
 const { Events } = require("discord.js");
-const fetch = require("node-fetch");
 
 module.exports = {
   name: Events.MessageCreate,
@@ -33,19 +32,6 @@ module.exports = {
         .reply("Saludos cordiales, ya no eres mi amigo")
         .then(() => console.log(`Replied to message: "${message.content}"`))
         .catch(console.error);
-    }
-    if (message.content === "pikachu") {
-      const getPokemon = async () => {
-        let response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${message.content}`
-        );
-        const data = await response.json();
-        return data;
-      };
-
-      let pokemon = await getPokemon();
-
-      message.reply(`#${pokemon.order}: ${pokemon.name}`);
     }
   },
 };

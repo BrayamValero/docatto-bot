@@ -3,18 +3,17 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("clear")
-    .setDescription("Elimina la cantidad de mensajes que desees")
+    .setDescription("Delete up to (100) messages from the current channel")
     .addIntegerOption((option) =>
       option
-        .setName("cantidad")
-        .setDescription("Cantidad de mensajes a eliminar")
+        .setName("amount")
+        .setDescription("Amount of messages you want to delete")
         .setMinValue(1)
         .setMaxValue(100)
         .setRequired(true)
     ),
   async execute(interaction) {
     const amount = await interaction.options.get("cantidad").value;
-    console.log(amount);
     const messages = await interaction.channel.messages.fetch({
       limit: amount,
     });
